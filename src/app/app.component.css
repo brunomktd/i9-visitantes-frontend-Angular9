@@ -1,0 +1,11 @@
+header {
+  background-color: #42bea5;
+}
+
+header a{
+  color: #FFF;
+}
+
+header a:hover{
+  color: #7159c1;
+}

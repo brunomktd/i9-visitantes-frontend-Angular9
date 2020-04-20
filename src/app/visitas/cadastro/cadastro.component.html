@@ -1,0 +1,37 @@
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+  <h4 class="y-5">Cadastro de formulário</h4>
+  <form id="add-form" #f="ngForm" (ngSubmit)="f.form.valid && saveVisit(f)" novalidate>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <input type="number" [(ngModel)]="visit.id_representative" id="representative" name="representative"
+        #representative="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && representative.invalid}"
+        placeholder="Código do representante">
+      </div>
+      <div class="form-group col-md-8">
+        <input type="text" [(ngModel)]="visit.name" id="name" name="name"
+        #name="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && name.invalid}"
+        placeholder="Nome do cliente">
+      </div>
+      <div class="form-group col-md-12">
+        <input type="text" [(ngModel)]="visit.address" id="address" name="address"
+        #address="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && address.invalid}"
+        placeholder="Endereço">
+      </div>
+      <div class="form-group col-md-4">
+        <input type="date" [(ngModel)]="visit.dt_visit" id="date" name="date"
+        #date="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && date.invalid}"
+        placeholder="Dia da visita">
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text" [(ngModel)]="visit.cost" id="cost" name="cost"
+        #cost="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && cost.invalid}"
+        placeholder="Custo com a viagem">
+      </div>
+      <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-secondary-color btn-md btn-block">
+          Cadastrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
