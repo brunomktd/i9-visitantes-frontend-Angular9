@@ -1,5 +1,5 @@
 import { VisitService } from './../visit.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Visit } from '../visit';
 
 @Component({
@@ -13,37 +13,27 @@ export class ListaComponent implements OnInit {
 
   visit = {} as Visit;
   @Input() visits = [];
+  @Output() visitHandlerChild = new EventEmitter();
 
   constructor(private visitService: VisitService) {
     this.colunas = [
       '#', 'Representante', 'Cliente', 'Endereço', 'Data da visita',
       'Custo', 'Editar', 'Excluir'];
-   }
-
-  ngOnInit() {
-    this.getVisit();
   }
 
-
-  getVisit() {
-    this.visitService.getVisits().subscribe(
-      (visits: Visit[]) => {
-        console.log(visits);
-        this.visits = visits;
-      }
-    );
-  }
+  ngOnInit() { }
 
   deleteVisit(visit: Visit) {
     this.visitService.deleteVisit(visit).subscribe(
       () => {
-        this.getVisit();
+        this.visitHandlerChild.emit(true);
       }
     );
   }
 
   editVisit(visit: Visit) {
-    this.visit = {... visit};
-    console.log(visit);
+    // this.visit = { ...visit };
+
+    this.visitHandlerChild.emit({...visit});
   }
 }

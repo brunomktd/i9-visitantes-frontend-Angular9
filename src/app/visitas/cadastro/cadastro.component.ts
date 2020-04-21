@@ -1,6 +1,6 @@
 import { VisitService } from './../visit.service';
 import { Visit } from './../visit';
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -10,38 +10,34 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroComponent implements OnInit {
 
-  visit = {} as Visit;
+  @Input() visit = {} as Visit;
   visits = [];
-
-  @Output() mudouValor = new EventEmitter();
+  @Output() visitHandlerChild = new EventEmitter();
 
   constructor(private visitService: VisitService) { }
 
   ngOnInit(): void {
-    this.getVisit();
   }
 
-
-  getVisit() {
-    this.visitService.getVisits().subscribe(
-      (visits: Visit[]) => {
-        this.visits = visits;
-        this.mudouValor.emit(visits);
-      }
-    );
-  }
+  // saveVisit(form: NgForm) {
+  //   this.visitService.saveVisit(this.visit).subscribe(
+  //     dados => {
+  //       this.visitHandlerChild.emit(dados);
+  //       this.cleanForm(form);
+  //     }, error => console.log(error)
+  //   );
+  // }
 
   saveVisit(form: NgForm) {
     this.visitService.saveVisit(this.visit).subscribe(
-      dados => {
+      (dados) => {
+        this.visitHandlerChild.emit(true);
         this.cleanForm(form);
-        this.getVisit();
       }, error => console.log(error)
     );
   }
 
   cleanForm(form: NgForm) {
-    this.getVisit();
     form.resetForm();
     this.visit = {} as Visit;
   }

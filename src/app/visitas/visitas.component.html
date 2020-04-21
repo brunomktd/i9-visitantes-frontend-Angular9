@@ -1,7 +1,7 @@
 <div>
-  <app-cadastro (mudouValor)="onMudouValor($event)"></app-cadastro>
+  <app-cadastro [visit]="visitPrimary" (visitHandlerChild)="visitHandler($event)"></app-cadastro>
 </div>
 
 <div>
-  <app-lista [visits]="visits"></app-lista>
+  <app-lista [visits]="visitsPrimary" (visitHandlerChild)="visitHandler($event)"></app-lista>
 </div>

@@ -1,5 +1,6 @@
+import { VisitService } from './visit.service';
 import { Component, OnInit } from '@angular/core';
-
+import { Visit } from './visit';
 
 @Component({
   selector: 'app-visitas',
@@ -8,16 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitasComponent implements OnInit {
 
+  visitPrimary: Visit;
+  visitsPrimary = [];
 
-  visits = [];
+  constructor(private visitService: VisitService) { }
 
-  constructor() { }
-
-  ngOnInit(): void { }
-
-  onMudouValor(visits) {
-    console.log("O valor é ");
-    this.visits = visits;
-    console.log(visits);
+  ngOnInit(): void {
+    this.getVisit();
   }
+
+  getVisit() {
+    this.visitService.getVisits().subscribe(
+      (visits: Visit[]) => {
+        this.visitsPrimary = visits;
+        console.log('Esse é o elemento pai: ', this.visitsPrimary);
+      }
+    );
+  }
+
+  // visitHandler(newVisit: Visit) {
+  //   console.log('A nova visita recebida é: ', newVisit);
+  //   this.visitsPrimary.push(newVisit);
+  // }
+
+  visitHandler(event: any){
+    if (event === true) {
+      console.log(event);
+      this.getVisit();
+    } else {
+      console.log(event);
+      this.visitPrimary = event;
+    }
+  }
+
 }
