@@ -9,8 +9,8 @@ import { Visit } from './visit';
 })
 export class VisitService {
 
-  // private REST_API_SERVER = "https://apinove.herokuapp.com/visits";
-  private REST_API_SERVER = "http://localhost:3333/visits";
+  private REST_API_SERVER = "https://apinove.herokuapp.com/visits";
+  // private REST_API_SERVER = "http://localhost:3333/visits";
 
   // Injetando o HttpClient
   constructor(private httpClient: HttpClient) { }

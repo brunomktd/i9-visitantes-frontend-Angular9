@@ -1,7 +1,7 @@
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
   <h4 class="y-5">Cadastro de formulário</h4>
-  <form id="add-form" #f="ngForm" (ngSubmit)="f.form.valid && saveVisit(f)" novalidate>
-    <div class="row">
+  <form id="add-form" #f="ngForm" (ngSubmit)="f.form.valid && sendForm(visit, f)" novalidate>
+    <div class="row" >
       <div class="form-group col-md-4">
         <input type="number" [(ngModel)]="visit.id_representative" id="representative" name="representative"
         #representative="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && representative.invalid}"

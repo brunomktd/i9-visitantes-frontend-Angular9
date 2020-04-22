@@ -10,31 +10,55 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroComponent implements OnInit {
 
-  @Input() visit = {} as Visit;
+  visit = {} as Visit;
+  @Input() visitOld: Visit;
   visits = [];
   @Output() visitHandlerChild = new EventEmitter();
+
 
   constructor(private visitService: VisitService) { }
 
   ngOnInit(): void {
   }
 
-  // saveVisit(form: NgForm) {
-  //   this.visitService.saveVisit(this.visit).subscribe(
-  //     dados => {
-  //       this.visitHandlerChild.emit(dados);
-  //       this.cleanForm(form);
-  //     }, error => console.log(error)
-  //   );
-  // }
+  ngOnChanges(visitOld: Visit): void {
+    this.validUpdate(this.visitOld);
+  }
 
-  saveVisit(form: NgForm) {
+  validUpdate(visit: Visit): void {
+    console.log("updateVisit: ", visit);
+    if (visit !== undefined) {
+      this.visit = visit;
+    }
+  }
+
+  updateVisit(visit: Visit) {
+    this.visitService.updateVisit(this.visit).subscribe(
+      (dados) => {
+        this.visitHandlerChild.emit(true);
+      }, error => console.log(error)
+    )
+  }
+
+  saveVisit(visit: Visit) {
     this.visitService.saveVisit(this.visit).subscribe(
       (dados) => {
         this.visitHandlerChild.emit(true);
-        this.cleanForm(form);
       }, error => console.log(error)
     );
+  }
+
+  sendForm(visit: Visit, form: NgForm) {
+    console.log(visit);
+    if (visit.id) {
+      console.log('update');
+      this.updateVisit(visit);
+      this.cleanForm(form);
+    } else {
+      console.log('created');
+      this.saveVisit(visit);
+      this.cleanForm(form);
+    }
   }
 
   cleanForm(form: NgForm) {

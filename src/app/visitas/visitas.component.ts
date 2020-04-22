@@ -32,13 +32,21 @@ export class VisitasComponent implements OnInit {
   //   this.visitsPrimary.push(newVisit);
   // }
 
-  visitHandler(event: any){
+  visitHandler(event: any) {
     if (event === true) {
       console.log(event);
       this.getVisit();
     } else {
-      console.log(event);
-      this.visitPrimary = event;
+      const obj = {
+        id: event.id,
+        id_representative: event.representative,
+        name: event.name,
+        address: event.address,
+        dt_visit: event.date,
+        cost: event.cost
+      }
+      this.visitPrimary = obj;
+      console.log('esse é o objeto ', this.visitPrimary);
     }
   }
 
