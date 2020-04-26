@@ -12,8 +12,8 @@
         <td>{{visit.representative}}</td>
         <td>{{visit.name}}</td>
         <td>{{visit.address}}</td>
-        <td>{{visit.date}}</td>
-        <td>{{visit.cost}}</td>
+        <td>{{visit.date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{visit.cost | currency:'BRL':true}}</td>
         <td>
           <button type="button" class="btn btn-success btn-sm" (click)="editVisit(visit)">Editar</button>
         </td>
