@@ -1,5 +1,5 @@
-export interface Visit {
-  id: number;
+export class Visit {
+  id ?: number;
   id_representative: number;
   name: string;
   address: string;

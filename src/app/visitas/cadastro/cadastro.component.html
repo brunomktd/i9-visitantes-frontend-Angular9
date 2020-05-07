@@ -18,20 +18,23 @@
         placeholder="Endereço">
       </div>
       <div class="form-group col-md-4">
-        <input type="date" [(ngModel)]="visit.dt_visit" id="date" name="date"
+        <input type="text" [ngModel]="visit.dt_visit | date:'dd/MM/yyyy'" id="date" name="date"
         #date="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && date.invalid}"
-        placeholder="Dia da visita">
+        placeholder="Dia da visita" mask="d0/M0/0000" (blur)="formatField(date)">
       </div>
       <div class="form-group col-md-4">
-        <input type="number" step="0.01" [(ngModel)]="visit.cost" id="cost" name="cost"
+        <input type="text" [ngModel]="visit.cost | currency:'BRL':true" id="cost" name="cost"
         #cost="ngModel" required class="form-control" [ngClass]="{'is-invalid': f.submitted && cost.invalid}"
-        placeholder="Custo com a viagem">
+        placeholder="Custo da viagem" (blur)="formatField(cost)">
       </div>
       <div class="form-group col-md-4">
         <button type="submit" class="btn btn-secondary-color btn-md btn-block">
-          Cadastrar
+          {{this.update !== true ? 'Cadastrar': 'Atualizar'}}
         </button>
       </div>
     </div>
   </form>
+  <div>
+    {{visit | json}}
+  </div>
 </div>
